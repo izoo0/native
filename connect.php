@@ -13,7 +13,7 @@ Please edit the database info to yours
 $db_host		= "localhost";
 $db_user		= "root";
 $db_pass		= "";
-$db_database	= "church";
+$db_database	= "native";
 include "idiorm.php";
 /* End config */
  ORM::configure("mysql:host=".$db_host.";dbname=".$db_database);

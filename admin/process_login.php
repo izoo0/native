@@ -10,11 +10,12 @@
 include '../connect.php';
 session_start();
 
-function clean($str) {
-		$str = @trim($str);
-		
-		return mysqli_real_escape_string($conn,$str,); 	
-	}
+function clean($data){
+	$data = trim($data);
+	 $data = stripslashes($data);
+	 $data = htmlspecialchars($data);
+	 return $data;
+   }
 	
 	//Sanitize the POST values
 	$login = clean($_POST['username']);
@@ -35,11 +36,11 @@ function clean($str) {
 	
 	//Create query
 	$qry="SELECT * FROM table_admin WHERE username='$login' AND password='$password'";
-	$result=mysql_query($qry,$conn);
+	$result=mysqli_query($conn,$qry);
 	
 	//Check whether the query was successful or not
 	if($result) { 
-		if(mysql_num_rows($result) > 0) {
+		if(mysqli_num_rows($result) > 0) {
 			//Login Successful
 			session_regenerate_id();
 			$member = mysqli_fetch_assoc($result);
